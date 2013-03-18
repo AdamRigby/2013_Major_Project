@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/title_1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#00AAFF"
+        android:textSize="50dp"
+        android:layout_alignParentTop="true" />
+    
+    <!-- Show on Map button -->
+    <Button android:id="@+id/btn_show_map"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:text="@string/places_button"
+        android:layout_marginTop="10dip"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+    	android:background="@drawable/current_location_selector"/>
+    
+    <!--  List view -->
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_show_map"/>
+    
+    
+ 
+</RelativeLayout>
