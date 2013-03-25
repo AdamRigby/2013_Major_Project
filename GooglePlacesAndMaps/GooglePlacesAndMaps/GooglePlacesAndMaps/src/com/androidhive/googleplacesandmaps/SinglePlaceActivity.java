@@ -3,6 +3,7 @@ package com.androidhive.googleplacesandmaps;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -29,6 +30,8 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 	
 	// Progress dialog
 	ProgressDialog pDialog;
+	
+	GPSTracker gps;
 
 	private String latitude;
 
@@ -52,7 +55,10 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 		View mapButton = findViewById(R.id.mapButton);
         mapButton.setOnClickListener(this);
 		
-		Intent i = getIntent();
+		View directionsButton = findViewById(R.id.directionsButton);
+		directionsButton.setOnClickListener(this);
+        
+        Intent i = getIntent();
 		
 		// Place referece id
 		String reference = i.getStringExtra(KEY_REFERENCE);
@@ -71,7 +77,24 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
     		i.putExtra("Place_Name", name);
     		startActivity(i);
     		break;
-    		
+    	case R.id.directionsButton:
+    		/*String uri = String.format("geo:%f,%f", latitude, longitude);
+    		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+    		startActivity(intent);*/
+    		gps = new GPSTracker(this);
+    		if (gps.canGetLocation()){
+    		Intent in = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?saddr=" + gps.getLatitude() + "," + gps.getLongitude() + "&daddr=" + latitude + "," + longitude));
+    		startActivity(in);
+    		break;
+    		} 
+    		else {
+    			// Can't get user's current location
+    			alert.showAlertDialog(SinglePlaceActivity.this, "GPS Status",
+    					"Couldn't get location information. Please enable GPS",
+    					false);
+    			// stop executing code by return
+    			break;
+    		}
     	}
     }
 	

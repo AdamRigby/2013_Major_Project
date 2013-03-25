@@ -59,18 +59,18 @@ public class ImageAdapter extends BaseAdapter {
 
     // references to our images
     private Integer[] mThumbIds = {
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1
+            R.drawable.restaurant, R.drawable.cafe,
+            R.drawable.bar, R.drawable.bank,
+            R.drawable.museum, R.drawable.atm,
+            R.drawable.theme_park, R.drawable.bus,
+            R.drawable.petrol, R.drawable.supermarket,
+            R.drawable.hospital, R.drawable.hotel,
+            R.drawable.takeaway, R.drawable.cinema,
+            R.drawable.nightclub, R.drawable.park,
+            R.drawable.parking, R.drawable.pharmacy,
+            R.drawable.postoffice, R.drawable.shopping_center,
+            R.drawable.stadium, R.drawable.store,
+            R.drawable.taxi, R.drawable.railway
     };
     
  // references to icon labels
@@ -80,7 +80,7 @@ public class ImageAdapter extends BaseAdapter {
             "Bar", 
             "Bank",
             "Museum",
-            "Atm's",
+            "ATM's",
             "Theme Park",
             "Bus Station",
             "Petrol Station",

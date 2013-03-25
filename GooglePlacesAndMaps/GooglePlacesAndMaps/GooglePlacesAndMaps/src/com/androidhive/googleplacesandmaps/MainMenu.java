@@ -24,11 +24,21 @@ private HashMap<Integer, String> map = new HashMap<Integer, String>();
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(this));
         
+        
+        Bundle extrasIntent = getIntent().getExtras();
+        
+        final Bundle extras = extrasIntent;
+        
+        
         gridview.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 //Toast.makeText(MainMenu.this, "" + position, Toast.LENGTH_SHORT).show();
             	String type = TranslatePos(position);
             	Intent i = new Intent(getApplicationContext(), MainPlacesActivity.class);
+            	if (extras != null && extras.containsKey("location_entered")) {
+                	String location = extras.getString("location_entered");
+                	i.putExtra("location_entered", location);
+                }
             	i.putExtra("SearchType", type);
         		startActivity(i);
             }

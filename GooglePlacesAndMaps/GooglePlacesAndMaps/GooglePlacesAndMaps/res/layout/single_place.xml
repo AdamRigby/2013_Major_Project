@@ -52,7 +52,7 @@
         android:layout_marginBottom="5dip"/>
 	
     <!-- Show map for single place -->
-
+
     <Button
         android:id="@+id/mapButton"
         android:layout_width="wrap_content"
@@ -64,6 +64,19 @@
         android:paddingRight="20dp"
         android:paddingTop="15dp"
         android:text="@string/single_place_map"
+        android:background="@drawable/current_location_selector" />
+
+    <Button
+        android:id="@+id/directionsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="15dp"
+        android:text="@string/get_directions"
         android:background="@drawable/current_location_selector" />
 
 </LinearLayout>

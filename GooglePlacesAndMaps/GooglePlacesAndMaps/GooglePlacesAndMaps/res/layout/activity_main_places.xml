@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/title_1"
+        android:text="@string/mainTitle"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#00AAFF"
         android:textSize="50dp"
@@ -22,8 +22,8 @@
         android:layout_below="@+id/textView2"
         android:text="@string/places_button"
         android:layout_marginTop="10dip"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
     	android:background="@drawable/current_location_selector"/>
     
     <!--  List view -->

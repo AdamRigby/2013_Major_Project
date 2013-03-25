@@ -84,9 +84,9 @@ public class AllPlacesMapActivity extends android.support.v4.app.FragmentActivit
     private void setUpMap() {
     	gMap.setMyLocationEnabled(true);
     	
-    	int noPlaces = 1;
-    	double avgLat = Double.parseDouble(user_latitude);
-    	double avgLong = Double.parseDouble(user_longitude);
+    	int noPlaces = 0;
+    	double avgLat = 0;//Double.parseDouble(user_latitude);
+    	double avgLong = 0;//Double.parseDouble(user_longitude);
     	// check for null in case it is null
     			if (nearPlaces.results != null) {
     				// loop through all the places
@@ -102,10 +102,11 @@ public class AllPlacesMapActivity extends android.support.v4.app.FragmentActivit
     				}
     				
     			}
+    	if (noPlaces > 0) {
+    		avgLat = avgLat / (noPlaces * 1.0);
+    		avgLong = avgLong / (noPlaces * 1.0);		
+    	}
     	
-    	avgLat = avgLat / (noPlaces * 1.0);
-    	avgLong = avgLong / (noPlaces * 1.0);
-    			
         //gMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(lat), Double.parseDouble(longit))).title(name));
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(avgLat, avgLong), 16));
         //onGoToPlace();

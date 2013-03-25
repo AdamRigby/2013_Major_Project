@@ -2,10 +2,13 @@ package com.androidhive.googleplacesandmaps;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -41,7 +44,7 @@ public class MainPlacesActivity extends Activity {
 	// GPS Location
 	GPSTracker gps;
 
-	// Button
+	// Button to launch map of all places
 	Button btnShowOnMap;
 
 	// Progress dialog
@@ -183,9 +186,23 @@ public class MainPlacesActivity extends Activity {
 				double radius = 5000; // 5Km 
 				
 				// get nearest places
-				nearPlaces = googlePlaces.search(gps.getLatitude(),
+				if (extras.containsKey("location_entered")) {
+                	String location = extras.getString("location_entered");
+                	Geocoder geoCoder = new Geocoder(getApplicationContext());
+					List<Address> addressList = geoCoder.getFromLocationName(location, 1);
+                	Address address = addressList.get(0);
+                	double selectedLat = 0;
+					double selectedLng = 0;
+					if(address.hasLatitude() && address.hasLongitude()){
+                	    selectedLat = address.getLatitude();
+                	    selectedLng = address.getLongitude();
+                	}
+                	nearPlaces = googlePlaces.search(selectedLat,
+    						selectedLng, radius, types);
+                } else {
+                	nearPlaces = googlePlaces.search(gps.getLatitude(),
 						gps.getLongitude(), radius, types);
-				
+                }
 
 			} catch (Exception e) {
 				e.printStackTrace();

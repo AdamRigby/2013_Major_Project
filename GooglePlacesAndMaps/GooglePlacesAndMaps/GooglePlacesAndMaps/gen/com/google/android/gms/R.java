@@ -133,47 +133,76 @@ containing a value of this type.
         public static final int padding_small=0x7f060000;
     }
     public static final class drawable {
-        public static final int btn_blue_matte=0x7f020000;
-        public static final int btn_white_matte=0x7f020001;
-        public static final int current_location_selector=0x7f020002;
-        public static final int fail=0x7f020003;
-        public static final int ic_action_search=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int mark_blue=0x7f020006;
-        public static final int mark_red=0x7f020007;
-        public static final int sample_0=0x7f020008;
-        public static final int sample_1=0x7f020009;
-        public static final int sample_2=0x7f02000a;
-        public static final int sample_3=0x7f02000b;
-        public static final int sample_4=0x7f02000c;
-        public static final int sample_5=0x7f02000d;
-        public static final int sample_6=0x7f02000e;
-        public static final int sample_7=0x7f02000f;
-        public static final int success=0x7f020010;
+        public static final int atm=0x7f020000;
+        public static final int bank=0x7f020001;
+        public static final int bar=0x7f020002;
+        public static final int btn_blue_matte=0x7f020003;
+        public static final int btn_white_matte=0x7f020004;
+        public static final int bus=0x7f020005;
+        public static final int cafe=0x7f020006;
+        public static final int cinema=0x7f020007;
+        public static final int current_location_selector=0x7f020008;
+        public static final int fail=0x7f020009;
+        public static final int hospital=0x7f02000a;
+        public static final int hotel=0x7f02000b;
+        public static final int ic_action_search=0x7f02000c;
+        public static final int ic_launcher=0x7f02000d;
+        public static final int icons=0x7f02000e;
+        public static final int mark_blue=0x7f02000f;
+        public static final int mark_red=0x7f020010;
+        public static final int museum=0x7f020011;
+        public static final int nightclub=0x7f020012;
+        public static final int park=0x7f020013;
+        public static final int parking=0x7f020014;
+        public static final int petrol=0x7f020015;
+        public static final int pharmacy=0x7f020016;
+        public static final int postoffice=0x7f020017;
+        public static final int railway=0x7f020018;
+        public static final int restaurant=0x7f020019;
+        public static final int sample_0=0x7f02001a;
+        public static final int sample_1=0x7f02001b;
+        public static final int sample_2=0x7f02001c;
+        public static final int sample_3=0x7f02001d;
+        public static final int sample_4=0x7f02001e;
+        public static final int sample_5=0x7f02001f;
+        public static final int sample_6=0x7f020020;
+        public static final int sample_7=0x7f020021;
+        public static final int shopping_center=0x7f020022;
+        public static final int stadium=0x7f020023;
+        public static final int store=0x7f020024;
+        public static final int success=0x7f020025;
+        public static final int supermarket=0x7f020026;
+        public static final int takeaway=0x7f020027;
+        public static final int taxi=0x7f020028;
+        public static final int theme_park=0x7f020029;
     }
     public static final class id {
-        public static final int address=0x7f040011;
-        public static final int btn_show_map=0x7f040008;
-        public static final int button1=0x7f040004;
-        public static final int editText1=0x7f040006;
-        public static final int gridview=0x7f04000f;
-        public static final int imageView1=0x7f04000c;
-        public static final int list=0x7f040009;
-        public static final int location=0x7f040013;
-        public static final int map=0x7f04000a;
-        public static final int mapButton=0x7f040014;
-        public static final int mapView=0x7f040010;
-        public static final int menu_settings=0x7f040015;
-        public static final int name=0x7f04000e;
+        public static final int address=0x7f040014;
+        public static final int btn_show_map=0x7f04000a;
+        public static final int directionsButton=0x7f040018;
+        public static final int gridview=0x7f040012;
+        public static final int imageView1=0x7f04000e;
+        public static final int list=0x7f04000b;
+        public static final int location=0x7f040016;
+        public static final int locationText=0x7f040007;
+        public static final int mainTitle=0x7f040005;
+        public static final int map=0x7f04000c;
+        public static final int mapButton=0x7f040017;
+        public static final int mapView=0x7f040013;
+        public static final int menu_settings=0x7f040019;
+        public static final int name=0x7f040011;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
-        public static final int phone=0x7f040012;
-        public static final int reference=0x7f04000d;
-        public static final int relativeLayout1=0x7f04000b;
+        public static final int phone=0x7f040015;
+        public static final int reference=0x7f040010;
+        public static final int relativeLayout1=0x7f04000d;
         public static final int satellite=0x7f040002;
+        public static final int searchButton=0x7f040008;
+        public static final int searchLayout=0x7f040006;
+        public static final int startButton=0x7f040004;
         public static final int terrain=0x7f040003;
-        public static final int textView1=0x7f040005;
-        public static final int textView2=0x7f040007;
+        public static final int textView1=0x7f04000f;
+        public static final int textView2=0x7f040009;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -193,7 +222,6 @@ containing a value of this type.
     }
     public static final class string {
         public static final int app_name=0x7f05000b;
-        public static final int button1=0x7f050010;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=30] 
@@ -237,17 +265,21 @@ containing a value of this type.
         Google Play services (from Play Store) [CHAR LIMIT=40] 
          */
         public static final int common_google_play_services_update_title=0x7f050007;
+        public static final int enterLocation=0x7f05001e;
+        public static final int get_directions=0x7f05001c;
         public static final int hello_world=0x7f05000c;
+        public static final int mainTitle=0x7f05000f;
         public static final int map=0x7f05001a;
         public static final int map_not_ready=0x7f05001b;
         public static final int menu_settings=0x7f05000d;
         public static final int places_button=0x7f050014;
         public static final int pop_up=0x7f050015;
+        public static final int searchButton=0x7f05001d;
         public static final int single_place_address=0x7f050017;
         public static final int single_place_map=0x7f050018;
         public static final int single_place_name=0x7f050016;
+        public static final int startButton=0x7f050010;
         public static final int text_box=0x7f050013;
-        public static final int title_1=0x7f05000f;
         public static final int title_activity_main=0x7f050011;
         public static final int title_activity_main_menu=0x7f050012;
         public static final int title_activity_main_places_activity=0x7f05000e;
