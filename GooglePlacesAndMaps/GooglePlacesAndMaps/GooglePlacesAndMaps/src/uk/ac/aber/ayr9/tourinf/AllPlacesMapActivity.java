@@ -1,39 +1,26 @@
-package com.androidhive.googleplacesandmaps;
-
-import java.util.List;
+package uk.ac.aber.ayr9.tourinf;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-//import android.util.Log;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapActivity;
-import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
+import uk.ac.aber.ayr9.tourinf.R;
+
+/**
+ * @author Adam Rigby (ayr9)
+ * New class to recreate a similar outcome to map class in androidhive third party
+ * code. Instead of using map view, uses the new Android Maps v2 API. Google's mapdemo
+ * example was used as a tutorial to find out how the new version works.
+ */
 
 public class AllPlacesMapActivity extends android.support.v4.app.FragmentActivity {
-	// Nearest places
+	
+	// List of nearest places
 	PlacesList nearPlaces;
-
-	// Map view
-	MapView mapView;
-
-	// Map overlay items
-	List<Overlay> mapOverlays;
-
-	AddItemizedOverlay itemizedOverlay;
-
-	GeoPoint geoPoint;
-	// Map controllers
-	MapController mc;
 	
 	double latitude;
 	double longitude;
@@ -41,38 +28,27 @@ public class AllPlacesMapActivity extends android.support.v4.app.FragmentActivit
 
 	private GoogleMap gMap;
 
-	private String user_latitude;
-
-	private String user_longitude;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 
-		// Getting intent data
 		Intent i = getIntent();
 		
-		// Users current geo location
-		user_latitude = i.getStringExtra("user_latitude");
-		user_longitude = i.getStringExtra("user_longitude");
-		
-		// Nearplaces list
+		// Get list of near places to display on map later
 		nearPlaces = (PlacesList) i.getSerializableExtra("near_places");
 
 		setUpMapIfNeeded();  
 
-		
-
 	}
 	
 	private void setUpMapIfNeeded() {
-        // Do a null check to confirm that we have not already instantiated the map.
+		//Complete a null check to confirm that the map has not already been instantiated
         if (gMap == null) {
-            // Try to obtain the map from the SupportMapFragment.
+            // Get map from the SupportMapFragment
             gMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
-            // Check if we were successful in obtaining the map.
+            // Check success of obtaining the map and launch setup.
             if (gMap != null) {
                 setUpMap();
             }
@@ -82,18 +58,21 @@ public class AllPlacesMapActivity extends android.support.v4.app.FragmentActivit
     }
     
     private void setUpMap() {
+    	//Lets users see their live location on map by pressing an icon.
     	gMap.setMyLocationEnabled(true);
     	
     	int noPlaces = 0;
     	double avgLat = 0;//Double.parseDouble(user_latitude);
     	double avgLong = 0;//Double.parseDouble(user_longitude);
-    	// check for null in case it is null
+    	
     			if (nearPlaces.results != null) {
-    				// loop through all the places
+    				
     				for (Place place : nearPlaces.results) {
     					latitude = place.geometry.location.lat; // latitude
     					longitude = place.geometry.location.lng; // longitude
     					
+    					//Add a place marker at the lat/long of each place in the list/
+    					//Allow it to be clickable, displaying their name and vicinity
     					gMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(place.name).snippet(place.vicinity));
     					
     					avgLat += latitude;
@@ -102,14 +81,14 @@ public class AllPlacesMapActivity extends android.support.v4.app.FragmentActivit
     				}
     				
     			}
+    	//Workout the average position of markers/places for camera to zoom centrally on the map		
     	if (noPlaces > 0) {
     		avgLat = avgLat / (noPlaces * 1.0);
     		avgLong = avgLong / (noPlaces * 1.0);		
     	}
     	
-        //gMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(lat), Double.parseDouble(longit))).title(name));
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(avgLat, avgLong), 16));
-        //onGoToPlace();
+        
     }
 
 	

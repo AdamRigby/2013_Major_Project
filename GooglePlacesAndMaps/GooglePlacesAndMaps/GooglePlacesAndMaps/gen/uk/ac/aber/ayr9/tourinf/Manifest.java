@@ -5,10 +5,10 @@
  * should not be modified by hand.
  */
 
-package com.androidhive.googleplacesandmaps;
+package uk.ac.aber.ayr9.tourinf;
 
 public final class Manifest {
     public static final class permission {
-        public static final String MAPS_RECEIVE="com.androidhive.googleplacesandmaps.permission.MAPS_RECEIVE";
+        public static final String MAPS_RECEIVE="uk.ac.aber.ayr9.tourinf.permission.MAPS_RECEIVE";
     }
 }

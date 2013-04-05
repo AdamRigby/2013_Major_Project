@@ -13,6 +13,5 @@
     android:verticalSpacing="75dp"
     android:horizontalSpacing="10dp"
     android:stretchMode="columnWidth"
-    android:gravity="center"
-/>
+    android:gravity="center"/>
 </LinearLayout>

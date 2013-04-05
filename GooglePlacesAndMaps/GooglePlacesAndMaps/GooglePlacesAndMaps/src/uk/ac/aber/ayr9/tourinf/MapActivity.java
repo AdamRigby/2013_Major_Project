@@ -1,23 +1,21 @@
-package com.androidhive.googleplacesandmaps;
+package uk.ac.aber.ayr9.tourinf;
 
 
-
-
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.GoogleMap.CancelableCallback;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
+import uk.ac.aber.ayr9.tourinf.R;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Toast;
+
+/**
+ * @author Adam Rigby (ayr9)
+ * Shows a Singular place on a map with a marker.
+ * Can display users current location.
+ */
+
 
 public class MapActivity extends  android.support.v4.app.FragmentActivity {
 	
@@ -26,18 +24,14 @@ public class MapActivity extends  android.support.v4.app.FragmentActivity {
 	private String longit;
 	private String name;
 	
-	/*CameraPosition Place_Location =
-	            new CameraPosition.Builder().target(new LatLng(Double.parseDouble(lat), Double.parseDouble(longit)))
-	                    .zoom(15.5f)
-	                    .bearing(0)
-	                    .tilt(25)
-	                    .build();*/
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         Bundle extras = getIntent().getExtras();
+        
+        /**Get extra information needed from SinglePlaceActivity to enable
+        the placement of the marker on the map */
 		lat = extras.getString("Lat");
 		longit = extras.getString("Long");
 		name = extras.getString("Place_Name");
@@ -51,12 +45,12 @@ public class MapActivity extends  android.support.v4.app.FragmentActivity {
     }
     
     private void setUpMapIfNeeded() {
-        // Do a null check to confirm that we have not already instantiated the map.
+        // Complete a null check to confirm that the map has not already been instantiated
         if (gMap == null) {
-            // Try to obtain the map from the SupportMapFragment.
+            // Get map from the SupportMapFragment
             gMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
-            // Check if we were successful in obtaining the map.
+            // Check success of obtaining the map and launch setup
             if (gMap != null) {
                 setUpMap();
             }
@@ -67,34 +61,7 @@ public class MapActivity extends  android.support.v4.app.FragmentActivity {
     	gMap.setMyLocationEnabled(true);
         gMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(lat), Double.parseDouble(longit))).title(name));
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat), Double.parseDouble(longit)), 16));
-        //onGoToPlace();
     }
-    
-    
-    /*public void onGoToPlace(View view) {
-        if (!checkReady()) {
-            return;
-        }
-
-        changeCamera(CameraUpdateFactory.newCameraPosition(Place_Location));
-    }
-    
-    private boolean checkReady() {
-        if (mMap == null) {
-            Toast.makeText(this, R.string.map_not_ready, Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        return true;
-    }
-    
-    private void changeCamera(CameraUpdate update) {
-        changeCamera(update, null);
-    }
-    
-    private void changeCamera(CameraUpdate update, CancelableCallback callback) {
-    	//mMap.animateCamera(update, callback);
-    	mMap.moveCamera(update);
-        }*/
     
 }
 

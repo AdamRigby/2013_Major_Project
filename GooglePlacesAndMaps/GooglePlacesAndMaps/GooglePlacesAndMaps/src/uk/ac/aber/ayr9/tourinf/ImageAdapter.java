@@ -1,4 +1,4 @@
-package com.androidhive.googleplacesandmaps;
+package uk.ac.aber.ayr9.tourinf;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,12 +9,22 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import uk.ac.aber.ayr9.tourinf.R;
+
+/**
+ * @author Adam Rigby + Used Android developer example.
+ * A custom adapter written for the MainMenu class to display the images in the gridview correctly
+ * and for different screen sizes. Android developer
+ * example used as a basis. Modified to use an additional
+ * layout file(gridview_row) to allow text to be attached
+ * to each icon image in the grid.
+ */
 
 public class ImageAdapter extends BaseAdapter {
-    private Context mContext;
+    
+	private Context mContext;
 
     public ImageAdapter(Context c) {
-        //mContext = c;
     	super();
         this.mContext = c;
     }
@@ -31,33 +41,31 @@ public class ImageAdapter extends BaseAdapter {
         return 0;
     }
 
-    // create a new ImageView for each item referenced by the Adapter
-    public View getView(int position, View convertView, ViewGroup parent) {
+    // Create new ImageView for each item referenced, using gridview_row
+    //as the layout file for icon and text.
+    @SuppressWarnings("unused")
+	public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
-        if (convertView == null) {  // if it's not recycled, initialize some attributes
+        if (convertView == null) {  // If not recycled, initialise attributes
            imageView = new ImageView(mContext);
            imageView.setLayoutParams(new GridView.LayoutParams(120, 120));
            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
            imageView.setPadding(8, 8, 8, 8);
-        	convertView = LayoutInflater.from(mContext).inflate(R.layout.gridview_row, null);
+           convertView = LayoutInflater.from(mContext).inflate(R.layout.gridview_row, null);
         } else {
            //imageView = (ImageView) convertView;
         }
         
-        
-        //imageView.setImageResource(mThumbIds[position]);
-        
         RelativeLayout rl=(RelativeLayout) convertView.findViewById(R.id.relativeLayout1);
-        imageView=(ImageView)convertView.findViewById(R.id.imageView1);
+        imageView=(ImageView)convertView.findViewById(R.id.imageGrid);
         imageView.setImageResource(mThumbIds[position]);
-        TextView txt= (TextView) convertView.findViewById(R.id.textView1);
+        TextView txt= (TextView) convertView.findViewById(R.id.textGrid);
         txt.setText(mThumbtext[position]);
         
         return convertView;
-       //return imageView;
     }
 
-    // references to our images
+    // References to icon images in drawable directory
     private Integer[] mThumbIds = {
             R.drawable.restaurant, R.drawable.cafe,
             R.drawable.bar, R.drawable.bank,
@@ -73,31 +81,19 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.taxi, R.drawable.railway
     };
     
- // references to icon labels
+    // Add labels to icons
     private String[] mThumbtext = {
-            "Restaurant",
-            "Cafe",
-            "Bar", 
-            "Bank",
-            "Museum",
-            "ATM's",
-            "Theme Park",
-            "Bus Station",
-            "Petrol Station",
-            "Supermarket",
-            "Hospital",
-            "Hotel",
-            "Takeaway",
-            "Cinema",
-            "Night Club",
-            "Park",
-            "Parking",
-            "Pharmacy",
-            "Post Office",
-            "Shopping Centre",
-            "Stadium",
-            "Stores",
-            "Taxi",
-            "Train Station"
+            "Restaurant", "Cafe",
+            "Bar", "Bank",
+            "Museum", "ATM's",
+            "Theme Park", "Bus Station",
+            "Petrol Station", "Supermarket",
+            "Hospital", "Hotel",
+            "Takeaway", "Cinema",
+            "Night Club", "Park",
+            "Parking", "Pharmacy",
+            "Post Office", "Shopping Centre",
+            "Stadium", "Stores",
+            "Taxi", "Train Station"
     };
 }

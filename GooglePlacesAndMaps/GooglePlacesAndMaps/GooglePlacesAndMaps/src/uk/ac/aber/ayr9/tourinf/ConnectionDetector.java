@@ -1,8 +1,14 @@
-package com.androidhive.googleplacesandmaps;
+package uk.ac.aber.ayr9.tourinf;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+/**
+ * @author Androidhive
+ * Connection class. Creates internet connection
+ * allowing the device and application to access online services. 
+ */
  
 public class ConnectionDetector {
  
@@ -13,7 +19,7 @@ public class ConnectionDetector {
     }
  
     /**
-     * Checking for all possible internet providers
+     * Check for possible internet providers
      * **/
     public boolean isConnectingToInternet(){
         ConnectivityManager connectivity = (ConnectivityManager) _context.getSystemService(Context.CONNECTIVITY_SERVICE);

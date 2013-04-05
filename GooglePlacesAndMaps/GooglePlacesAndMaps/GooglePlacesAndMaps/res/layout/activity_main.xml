@@ -4,29 +4,38 @@
     android:layout_height="match_parent"
     android:visibility="visible" >
 
+    <LinearLayout
+        android:id="@+id/mainTitleLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/startButton"
+        android:layout_alignParentTop="true"
+        >
+        <TextView
+        android:id="@+id/mainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/mainTitle"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#00AAFF"
+        android:textSize="95dp"
+        tools:context=".MainActivity" />
+        
+        
+    </LinearLayout>
     <Button
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/mainTitle"
-        android:layout_alignRight="@+id/mainTitle"
+        android:layout_alignLeft="@+id/mainTitleLayout"
+        android:layout_alignRight="@+id/mainTitleLayout"
         android:layout_centerVertical="true"
         android:background="@drawable/current_location_selector"
         android:text="@string/startButton" />
 
-    <TextView
-        android:id="@+id/mainTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/startButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="109dp"
-        android:text="@string/mainTitle"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#00AAFF"
-        android:textSize="100dp"
-        tools:context=".MainActivity" />
-
+    
     <RelativeLayout
         android:id="@+id/searchLayout"
         android:layout_width="match_parent"

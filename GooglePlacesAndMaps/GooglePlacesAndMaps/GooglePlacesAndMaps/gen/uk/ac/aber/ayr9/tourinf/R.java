@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.androidhive.googleplacesandmaps;
+package uk.ac.aber.ayr9.tourinf;
 
 public final class R {
     public static final class attr {
@@ -177,32 +177,39 @@ containing a value of this type.
         public static final int theme_park=0x7f020029;
     }
     public static final class id {
-        public static final int address=0x7f040014;
-        public static final int btn_show_map=0x7f04000a;
-        public static final int directionsButton=0x7f040018;
-        public static final int gridview=0x7f040012;
-        public static final int imageView1=0x7f04000e;
-        public static final int list=0x7f04000b;
-        public static final int location=0x7f040016;
-        public static final int locationText=0x7f040007;
-        public static final int mainTitle=0x7f040005;
-        public static final int map=0x7f04000c;
-        public static final int mapButton=0x7f040017;
-        public static final int mapView=0x7f040013;
-        public static final int menu_settings=0x7f040019;
-        public static final int name=0x7f040011;
+        public static final int address=0x7f040015;
+        public static final int btn_show_map=0x7f04000b;
+        public static final int callButton=0x7f04001f;
+        public static final int directionsButton=0x7f04001d;
+        public static final int gridview=0x7f040013;
+        public static final int imageGrid=0x7f04000f;
+        public static final int list=0x7f04000c;
+        public static final int location=0x7f040017;
+        public static final int locationText=0x7f040008;
+        public static final int mainTitle=0x7f040006;
+        public static final int mainTitleLayout=0x7f040004;
+        public static final int map=0x7f04000d;
+        public static final int mapButton=0x7f04001c;
+        public static final int mapView=0x7f040014;
+        public static final int menu_settings=0x7f040020;
+        public static final int name=0x7f040012;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
-        public static final int phone=0x7f040015;
-        public static final int reference=0x7f040010;
-        public static final int relativeLayout1=0x7f04000d;
+        public static final int phone=0x7f040016;
+        public static final int placeImage=0x7f04001b;
+        public static final int rating=0x7f040019;
+        public static final int ratingBar=0x7f04001a;
+        public static final int ratingLayout=0x7f040018;
+        public static final int reference=0x7f040011;
+        public static final int relativeLayout1=0x7f04000e;
         public static final int satellite=0x7f040002;
-        public static final int searchButton=0x7f040008;
-        public static final int searchLayout=0x7f040006;
-        public static final int startButton=0x7f040004;
+        public static final int searchButton=0x7f040009;
+        public static final int searchLayout=0x7f040007;
+        public static final int startButton=0x7f040005;
         public static final int terrain=0x7f040003;
-        public static final int textView1=0x7f04000f;
-        public static final int textView2=0x7f040009;
+        public static final int textGrid=0x7f040010;
+        public static final int textView2=0x7f04000a;
+        public static final int websiteButton=0x7f04001e;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -222,6 +229,7 @@ containing a value of this type.
     }
     public static final class string {
         public static final int app_name=0x7f05000b;
+        public static final int call_place=0x7f05001a;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=30] 
@@ -265,16 +273,17 @@ containing a value of this type.
         Google Play services (from Play Store) [CHAR LIMIT=40] 
          */
         public static final int common_google_play_services_update_title=0x7f050007;
-        public static final int enterLocation=0x7f05001e;
-        public static final int get_directions=0x7f05001c;
+        public static final int enterLocation=0x7f050020;
+        public static final int get_directions=0x7f05001e;
+        public static final int go_to_website=0x7f050019;
         public static final int hello_world=0x7f05000c;
         public static final int mainTitle=0x7f05000f;
-        public static final int map=0x7f05001a;
-        public static final int map_not_ready=0x7f05001b;
+        public static final int map=0x7f05001c;
+        public static final int map_not_ready=0x7f05001d;
         public static final int menu_settings=0x7f05000d;
         public static final int places_button=0x7f050014;
         public static final int pop_up=0x7f050015;
-        public static final int searchButton=0x7f05001d;
+        public static final int searchButton=0x7f05001f;
         public static final int single_place_address=0x7f050017;
         public static final int single_place_map=0x7f050018;
         public static final int single_place_name=0x7f050016;
@@ -283,7 +292,7 @@ containing a value of this type.
         public static final int title_activity_main=0x7f050011;
         public static final int title_activity_main_menu=0x7f050012;
         public static final int title_activity_main_places_activity=0x7f05000e;
-        public static final int title_activity_map=0x7f050019;
+        public static final int title_activity_map=0x7f05001b;
     }
     public static final class style {
         public static final int AppTheme=0x7f070000;
@@ -295,20 +304,20 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #MapAttrs_cameraBearing com.androidhive.googleplacesandmaps:cameraBearing}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_cameraTargetLat com.androidhive.googleplacesandmaps:cameraTargetLat}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_cameraTargetLng com.androidhive.googleplacesandmaps:cameraTargetLng}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_cameraTilt com.androidhive.googleplacesandmaps:cameraTilt}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_cameraZoom com.androidhive.googleplacesandmaps:cameraZoom}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_mapType com.androidhive.googleplacesandmaps:mapType}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_uiCompass com.androidhive.googleplacesandmaps:uiCompass}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_uiRotateGestures com.androidhive.googleplacesandmaps:uiRotateGestures}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_uiScrollGestures com.androidhive.googleplacesandmaps:uiScrollGestures}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_uiTiltGestures com.androidhive.googleplacesandmaps:uiTiltGestures}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_uiZoomControls com.androidhive.googleplacesandmaps:uiZoomControls}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_uiZoomGestures com.androidhive.googleplacesandmaps:uiZoomGestures}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_useViewLifecycle com.androidhive.googleplacesandmaps:useViewLifecycle}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_zOrderOnTop com.androidhive.googleplacesandmaps:zOrderOnTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraBearing uk.ac.aber.ayr9.tourinf:cameraBearing}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTargetLat uk.ac.aber.ayr9.tourinf:cameraTargetLat}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTargetLng uk.ac.aber.ayr9.tourinf:cameraTargetLng}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTilt uk.ac.aber.ayr9.tourinf:cameraTilt}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraZoom uk.ac.aber.ayr9.tourinf:cameraZoom}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_mapType uk.ac.aber.ayr9.tourinf:mapType}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiCompass uk.ac.aber.ayr9.tourinf:uiCompass}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiRotateGestures uk.ac.aber.ayr9.tourinf:uiRotateGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiScrollGestures uk.ac.aber.ayr9.tourinf:uiScrollGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiTiltGestures uk.ac.aber.ayr9.tourinf:uiTiltGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiZoomControls uk.ac.aber.ayr9.tourinf:uiZoomControls}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiZoomGestures uk.ac.aber.ayr9.tourinf:uiZoomGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_useViewLifecycle uk.ac.aber.ayr9.tourinf:useViewLifecycle}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_zOrderOnTop uk.ac.aber.ayr9.tourinf:zOrderOnTop}</code></td><td></td></tr>
            </table>
            @see #MapAttrs_cameraBearing
            @see #MapAttrs_cameraTargetLat
@@ -332,7 +341,7 @@ containing a value of this type.
             0x7f01000c, 0x7f01000d
         };
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#cameraBearing}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#cameraBearing}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -346,7 +355,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_cameraBearing = 1;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#cameraTargetLat}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#cameraTargetLat}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -360,7 +369,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_cameraTargetLat = 2;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#cameraTargetLng}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#cameraTargetLng}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -374,7 +383,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_cameraTargetLng = 3;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#cameraTilt}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#cameraTilt}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -388,7 +397,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_cameraTilt = 4;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#cameraZoom}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#cameraZoom}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -402,7 +411,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_cameraZoom = 5;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#mapType}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#mapType}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -421,7 +430,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_mapType = 0;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#uiCompass}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#uiCompass}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -435,7 +444,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_uiCompass = 6;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#uiRotateGestures}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#uiRotateGestures}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -449,7 +458,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_uiRotateGestures = 7;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#uiScrollGestures}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#uiScrollGestures}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -463,7 +472,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_uiScrollGestures = 8;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#uiTiltGestures}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#uiTiltGestures}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -477,7 +486,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_uiTiltGestures = 9;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#uiZoomControls}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#uiZoomControls}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -491,7 +500,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_uiZoomControls = 10;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#uiZoomGestures}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#uiZoomGestures}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -505,7 +514,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_uiZoomGestures = 11;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#useViewLifecycle}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#useViewLifecycle}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -519,7 +528,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_useViewLifecycle = 12;
         /**
-          <p>This symbol is the offset where the {@link com.androidhive.googleplacesandmaps.R.attr#zOrderOnTop}
+          <p>This symbol is the offset where the {@link uk.ac.aber.ayr9.tourinf.R.attr#zOrderOnTop}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 

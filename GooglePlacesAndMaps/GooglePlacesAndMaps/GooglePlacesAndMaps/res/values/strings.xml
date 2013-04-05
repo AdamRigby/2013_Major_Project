@@ -14,6 +14,8 @@
     <string name="single_place_name">Name:</string>
     <string name="single_place_address">Address:</string>
     <string name="single_place_map">Show on Map</string>
+    <string name="go_to_website">Go to Website</string>
+    <string name="call_place">Call</string>
     <string name="title_activity_map">Place Location</string>
     <string name="map">MAP!</string>
     <string name="map_not_ready">MAP NOT READY!</string>

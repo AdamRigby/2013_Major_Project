@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.androidhive.googleplacesandmaps"
+    package="uk.ac.aber.ayr9.tourinf"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -16,10 +16,13 @@
     <!-- Access Location -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     
+    <!-- Phone Permissions -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    
   <permission
-    android:name="com.androidhive.googleplacesandmaps.permission.MAPS_RECEIVE"
+    android:name="uk.ac.aber.ayr9.tourinf.permission.MAPS_RECEIVE"
     android:protectionLevel="signature"/>
-  <uses-permission android:name="com.androidhive.googleplacesandmaps.permission.MAPS_RECEIVE"/>
+  <uses-permission android:name="uk.ac.aber.ayr9.tourinf.permission.MAPS_RECEIVE"/>
   
   <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
   
@@ -46,9 +49,11 @@
 
         <!-- Add Google Map Library -->
         <uses-library android:name="com.google.android.maps" />
+        
+        <service android:name="uk.ac.aber.ayr9.tourinf.GPSTracker" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="uk.ac.aber.ayr9.tourinf.MainActivity"
             android:label="@string/title_activity_main"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
@@ -59,33 +64,33 @@
         </activity>
         
         <activity
-            android:name=".MainMenu"
+            android:name="uk.ac.aber.ayr9.tourinf.MainMenu"
             android:label="@string/title_activity_main_menu" >
         </activity>
         <activity
-            android:name=".MainPlacesActivity"
+            android:name="uk.ac.aber.ayr9.tourinf.MainPlacesActivity"
             android:label="@string/title_activity_main_places_activity" >
         </activity>
 
         <!-- SinglePlaceActivity -->
         <activity
-            android:name=".SinglePlaceActivity"
+            android:name="uk.ac.aber.ayr9.tourinf.SinglePlaceActivity"
             android:label="Place Details" >
         </activity>
 
         <!-- PlacesMapActivity -->
         <activity
-            android:name=".PlacesMapActivity"
+            android:name="uk.ac.aber.ayr9.tourinf.PlacesMapActivity"
             android:label="Near Places Map View" >
         </activity>
         
         <activity
-            android:name=".AllPlacesMapActivity"
+            android:name="uk.ac.aber.ayr9.tourinf.AllPlacesMapActivity"
             android:label="All Near Places Map View" >
         </activity>
         
         <activity
-            android:name=".MapActivity"
+            android:name="uk.ac.aber.ayr9.tourinf.MapActivity"
             android:label="@string/title_activity_map" >
         </activity>       
     </application>

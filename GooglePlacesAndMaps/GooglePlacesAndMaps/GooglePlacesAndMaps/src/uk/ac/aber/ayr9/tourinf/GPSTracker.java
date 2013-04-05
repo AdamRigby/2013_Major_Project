@@ -1,4 +1,4 @@
-package com.androidhive.googleplacesandmaps;
+package uk.ac.aber.ayr9.tourinf;
 
 import android.app.AlertDialog;
 import android.app.Service;
@@ -8,10 +8,17 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
+
+/**
+ * @author Androidhive
+ * Uses an Android service to obtain a GPS provider. 
+ * Then returns your location. Methods to get lat/long seperately provided.
+ */
 
 public class GPSTracker extends Service implements LocationListener {
 
@@ -26,17 +33,14 @@ public class GPSTracker extends Service implements LocationListener {
 	// flag for GPS status
 	boolean canGetLocation = false;
 
-	Location location = null; // location
-	double latitude; // latitude
-	double longitude; // longitude
+	Location location = null; 
+	double latitude; 
+	double longitude; 
 
-	// The minimum distance to change Updates in meters
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
-	// The minimum time between updates in milliseconds
 	private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
 
-	// Declaring a Location Manager
 	protected LocationManager locationManager;
 
 	public GPSTracker(Context context) {
@@ -49,11 +53,11 @@ public class GPSTracker extends Service implements LocationListener {
 			locationManager = (LocationManager) mContext
 					.getSystemService(LOCATION_SERVICE);
 
-			// getting GPS status
+			// get GPS status
 			isGPSEnabled = locationManager
 					.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-			// getting network status
+			// get network status
 			isNetworkEnabled = locationManager
 					.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
@@ -76,7 +80,7 @@ public class GPSTracker extends Service implements LocationListener {
 						}
 					}
 				}
-				// if GPS Enabled get lat/long using GPS Services
+				// If GPS Enabled get lat/long using GPS Services
 				if (isGPSEnabled) {
 					if (location == null) {
 						locationManager.requestLocationUpdates(
@@ -103,43 +107,32 @@ public class GPSTracker extends Service implements LocationListener {
 		return location;
 	}
 
-	/**
-	 * Stop using GPS listener Calling this function will stop using GPS in your
-	 * app
-	 * */
+	
+	//Call this function to stop using GPS in the app
 	public void stopUsingGPS() {
 		if (locationManager != null) {
 			locationManager.removeUpdates(GPSTracker.this);
 		}
 	}
 
-	/**
-	 * Function to get latitude
-	 * */
 	public double getLatitude() {
 		if (location != null) {
 			latitude = location.getLatitude();
 		}
 
-		// return latitude
 		return latitude;
 	}
 
-	/**
-	 * Function to get longitude
-	 * */
 	public double getLongitude() {
 		if (location != null) {
 			longitude = location.getLongitude();
 		}
 
-		// return longitude
 		return longitude;
 	}
 
 	/**
-	 * Function to check GPS/wifi enabled
-	 * 
+	 * Check GPS/wifi enabled
 	 * @return boolean
 	 * */
 	public boolean canGetLocation() {
@@ -147,18 +140,15 @@ public class GPSTracker extends Service implements LocationListener {
 	}
 
 	/**
-	 * Function to show settings alert dialog On pressing Settings button will
-	 * lauch Settings Options
+	 * Show settings alert dialog on pressing Settings button
+	 * launches settings options
 	 * */
 	public void showSettingsAlert() {
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
-
-		// Setting Dialog Title
+		
 		alertDialog.setTitle("GPS is settings");
 
-		// Setting Dialog Message
-		alertDialog
-				.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+		alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
 
 		// On pressing Settings button
 		alertDialog.setPositiveButton("Settings",
@@ -170,7 +160,7 @@ public class GPSTracker extends Service implements LocationListener {
 					}
 				});
 
-		// on pressing cancel button
+		// On pressing cancel button
 		alertDialog.setNegativeButton("Cancel",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
@@ -178,7 +168,7 @@ public class GPSTracker extends Service implements LocationListener {
 					}
 				});
 
-		// Showing Alert Message
+		// Show Alert Message
 		alertDialog.show();
 	}
 
@@ -198,8 +188,15 @@ public class GPSTracker extends Service implements LocationListener {
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
 
+	private final IBinder mBinder = new LocalBinder();
 	@Override
 	public IBinder onBind(Intent arg0) {
-		return null;
+		return mBinder;
 	}
+	
+	public class LocalBinder extends Binder {
+        GPSTracker getService() {
+            return GPSTracker.this;
+        }
+    }
 }

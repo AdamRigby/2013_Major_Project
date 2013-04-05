@@ -1,15 +1,21 @@
-package com.androidhive.googleplacesandmaps;
+package uk.ac.aber.ayr9.tourinf;
 
 import java.util.HashMap;
+import uk.ac.aber.ayr9.tourinf.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-//import android.widget.Toast;
 import android.view.*;
 import android.content.Intent;
+
+/**
+ * @author Adam Rigby (ayr9)
+ * Displays the main menu of the application using icons using the
+ * gridview layout in main_menu.xml and the custom image adapter.
+ */
 
 public class MainMenu extends Activity {
 	
@@ -24,27 +30,39 @@ private HashMap<Integer, String> map = new HashMap<Integer, String>();
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(this));
         
-        
+        // Get location entered from MainActivity if one was entered
         Bundle extrasIntent = getIntent().getExtras();
         
         final Bundle extras = extrasIntent;
         
         
         gridview.setOnItemClickListener(new OnItemClickListener() {
+        	
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                //Toast.makeText(MainMenu.this, "" + position, Toast.LENGTH_SHORT).show();
+            	
+            	/**When an items clicked, use its position
+            	to get the corresponding value from the HashMap */
             	String type = TranslatePos(position);
+            	
             	Intent i = new Intent(getApplicationContext(), MainPlacesActivity.class);
+            	
             	if (extras != null && extras.containsKey("location_entered")) {
                 	String location = extras.getString("location_entered");
+                	
+                	//If location entered in MainActivity forward location on
                 	i.putExtra("location_entered", location);
                 }
+            	/** Forward the type of place wanted to search
+            	 from the user click and HashMap value*/
             	i.putExtra("SearchType", type);
+            	
+            	//Start MainPlacesActivity
         		startActivity(i);
             }
         });
     }
     
+    //Enter key value pairs into HashMap
     public void populateMap(){
     	
     map.put(0, "restaurant"); 

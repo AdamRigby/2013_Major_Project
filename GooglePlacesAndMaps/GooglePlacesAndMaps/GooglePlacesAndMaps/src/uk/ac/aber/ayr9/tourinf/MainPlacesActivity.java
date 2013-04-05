@@ -1,9 +1,9 @@
-package com.androidhive.googleplacesandmaps;
+package uk.ac.aber.ayr9.tourinf;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import uk.ac.aber.ayr9.tourinf.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -23,31 +23,37 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+/**
+ * @author Androidhive + Some Modifications from Adam Rigby (ayr9)
+ * This Activity is responsible for calling the GooglePlaces class
+ * receiving its results and displaying them. The doInBackground method
+ * in LoadPlaces class has been modified to take a typle of place as a 
+ * parameter. A Geocoder has also been implemented to take in any address'
+ * entered manually and convert them into a lat/long value for Places search
+ * and mapping.   
+ */
+
 
 public class MainPlacesActivity extends Activity {
 
-	// flag for Internet connection status
+	// Flag for Internet connection status
 	Boolean isInternetPresent = false;
 
-	// Connection detector class
 	ConnectionDetector cd;
 	
-	// Alert Dialog Manager
 	AlertDialogManager alert = new AlertDialogManager();
 
-	// Google Places
 	GooglePlaces googlePlaces;
 
 	// Places List
 	PlacesList nearPlaces;
 
-	// GPS Location
 	GPSTracker gps;
 
 	// Button to launch map of all places
 	Button btnShowOnMap;
 
-	// Progress dialog
+	// Progress dialog animation for when application is loading
 	ProgressDialog pDialog;
 	
 	// Places Listview
@@ -90,7 +96,7 @@ public class MainPlacesActivity extends Activity {
 			alert.showAlertDialog(MainPlacesActivity.this, "GPS Status",
 					"Couldn't get location information. Please enable GPS",
 					false);
-			// stop executing code by return
+			// Stop executing code by return
 			return;
 		}
 
@@ -100,11 +106,11 @@ public class MainPlacesActivity extends Activity {
 		// button show on map
 		btnShowOnMap = (Button) findViewById(R.id.btn_show_map);
 
-		// calling background Async task to load Google Places
-		// After getting places from Google all the data is shown in listview
+		/**Call background Async task to load Google Places
+		After getting places from Google all the data is shown in listview**/
 		new LoadPlaces().execute();
 
-		/** Button click event for shown on map */
+		// Button click event for shown on map
 		btnShowOnMap.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -121,35 +127,29 @@ public class MainPlacesActivity extends Activity {
 				startActivity(i);
 			}
 		});
-		
-		
-		/**
-		 * ListItem click event
-		 * On selecting a listitem SinglePlaceActivity is launched
-		 * */
+			
+		// ListItem click event. On selecting a listitem SinglePlaceActivity is launched
 		lv.setOnItemClickListener(new OnItemClickListener() {
  
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
-            	// getting values from selected ListItem
+            	// Get value from selected ListItem
                 String reference = ((TextView) view.findViewById(R.id.reference)).getText().toString();
                 
-                // Starting new intent
+                // Start new intent
                 Intent in = new Intent(getApplicationContext(),
                         SinglePlaceActivity.class);
                 
-                // Sending place refrence id to single place activity
-                // place refrence id used to get "Place full details"
+                /** Send place refrence id to SinglePlaceActivity.
+                Place refrence used to get the places full details **/
                 in.putExtra(KEY_REFERENCE, reference);
                 startActivity(in);
             }
         });
 	}
 
-	/**
-	 * Background Async Task to Load Google places
-	 * */
+	 //Background AsyncTask to load Google Places
 	class LoadPlaces extends AsyncTask<String, String, String> {
 
 		/**
@@ -166,28 +166,28 @@ public class MainPlacesActivity extends Activity {
 		}
 
 		/**
-		 * getting Places JSON
+		 * Get Places JSON
 		 * */
 		protected String doInBackground(String... args) {
-			// creating Places class object
+			// create Places class object
 			googlePlaces = new GooglePlaces();
 			
 			try {
-				// Separeate your place types by PIPE symbol "|"
-				// If you want all types places make it as null
-				// Check list of types supported by google
-				//
+				
 				Bundle extras = getIntent().getExtras();
-				String types = extras.getString("SearchType"); // get type from MainMenu/ GridView
+				String types = extras.getString("SearchType"); // get Place type from MainMenu (GridView Layout)
 				
-				//String types = "cafe|restaurant"; // Listing places only cafes, restaurants
-				
-				// Radius in meters - increase this value if you don't find any places
+				// Radius around location entered in which places will be found
 				double radius = 5000; // 5Km 
 				
-				// get nearest places
+				/**Get nearest places by calling search method of googlePlaces class.
+				 Use Geocoder values if location entered manually otherwise use GPS location*/
 				if (extras.containsKey("location_entered")) {
+					// Get manually entered location if given
                 	String location = extras.getString("location_entered");
+                	
+                	/**Create a Geocoder to convert manually entered location
+                	 into a lat/long for Places search and mapping*/
                 	Geocoder geoCoder = new Geocoder(getApplicationContext());
 					List<Address> addressList = geoCoder.getFromLocationName(location, 1);
                 	Address address = addressList.get(0);
@@ -212,10 +212,8 @@ public class MainPlacesActivity extends Activity {
 
 		/**
 		 * After completing background task Dismiss the progress dialog
-		 * and show the data in UI
-		 * Always use runOnUiThread(new Runnable()) to update UI from background
-		 * thread, otherwise you will get error
-		 * **/
+		 * and show the data in UI. Always use runOnUiThread(new Runnable()) 
+		 * to update UI from background thread **/
 		protected void onPostExecute(String file_url) {
 			// dismiss the dialog after getting all products
 			pDialog.dismiss();

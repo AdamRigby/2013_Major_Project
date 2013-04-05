@@ -1,10 +1,7 @@
-package com.androidhive.googleplacesandmaps;
+package uk.ac.aber.ayr9.tourinf;
 
 import org.apache.http.client.HttpResponseException;
-
-//import android.content.Context;
 import android.util.Log;
-
 import com.google.api.client.googleapis.GoogleHeaders;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
@@ -12,22 +9,27 @@ import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.http.json.JsonHttpParser;
 import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.json.jackson.JacksonFactory;
 
-@SuppressWarnings("deprecation")
+/**
+ * @author Androidhive + Adam Rigby (ayr9)
+ * Code modified, JsonHttpParser replaced with JsonObjectParser
+ * due to depracation of old method. Basic Details changed e.g.
+ * API Key, application name.
+ */
+
+
 public class GooglePlaces {
 
-	/** Global instance of the HTTP transport. */
+	//Global instance of the HTTP transport
 	private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
-	// Google API Key for browser apps. Old: AIzaSyCRLa4LQZWNQBcjCYcIVYA45i9i8zfClqc	 					
+	// Google API Key for browser apps. 	 					
 	private static final String API_KEY = "AIzaSyDx7K8jvVIIK8SlSGcLJZkeqdGlEdR6OWs";
 
-	// Google Places serach url's
+	// Google Places serach URLs
 	private static final String PLACES_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/search/json?";
-	//private static final String PLACES_TEXT_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/search/json?";
 	private static final String PLACES_DETAILS_URL = "https://maps.googleapis.com/maps/api/place/details/json?";
 
 	private double _latitude;
@@ -35,9 +37,9 @@ public class GooglePlaces {
 	private double _radius;
 	
 	/**
-	 * Searching places
+	 * Places Search Method, uses URL above and params below to construct a full URL to get list of places 
 	 * @param latitude - latitude of place
-	 * @params longitude - longitude of place
+	 * @param longitude - longitude of place
 	 * @param radius - radius of searchable area
 	 * @param types - type of place to search
 	 * @return list of places
@@ -56,14 +58,15 @@ public class GooglePlaces {
 					.buildGetRequest(new GenericUrl(PLACES_SEARCH_URL));
 			request.getUrl().put("key", API_KEY);
 			request.getUrl().put("location", _latitude + "," + _longitude);
-			request.getUrl().put("radius", _radius); // in meters
+			request.getUrl().put("radius", _radius); // Unit in meters
 			request.getUrl().put("sensor", "false");
 			if(types != null)
 				request.getUrl().put("types", types);
 			
-			//Log.e("URL Value",request.getUrl().toString());
+			Log.e("URL Value",request.getUrl().toString());
+			//Parse data at URL address  
 			PlacesList list = request.execute().parseAs(PlacesList.class);
-			// Check log cat for places response status
+			// Log places response status
 			Log.d("Places Status", "" + list.status);
 			return list;
 
@@ -75,9 +78,9 @@ public class GooglePlaces {
 	}
 
 	/**
-	 * Searching single place full details
-	 * @param refrence - reference id of place
-	 * 				   - which you will get in search api request
+	 * Searches to get more details on a singular place from the original list
+	 * @param refrence - reference id of place in question
+	 * 				   - This is obtained from parsing the origninal search API request
 	 * */
 	public PlaceDetails getPlaceDetails(String reference) throws Exception {
 		try {
@@ -88,7 +91,7 @@ public class GooglePlaces {
 			request.getUrl().put("key", API_KEY);
 			request.getUrl().put("reference", reference);
 			request.getUrl().put("sensor", "false");
-
+			Log.e("URL Detail",request.getUrl().toString());
 			PlaceDetails place = request.execute().parseAs(PlaceDetails.class);
 			
 			return place;
@@ -100,7 +103,7 @@ public class GooglePlaces {
 	}
 
 	/**
-	 * Creating http request Factory
+	 * Create HttpRequestFactory
 	 * */
 	public static HttpRequestFactory createRequestFactory(
 			final HttpTransport transport) {

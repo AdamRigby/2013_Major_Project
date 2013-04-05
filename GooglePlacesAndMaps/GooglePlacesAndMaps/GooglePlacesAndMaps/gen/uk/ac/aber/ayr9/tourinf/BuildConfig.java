@@ -1,5 +1,5 @@
 /** Automatically generated file. DO NOT MODIFY */
-package com.androidhive.googleplacesandmaps;
+package uk.ac.aber.ayr9.tourinf;
 
 public final class BuildConfig {
     public final static boolean DEBUG = true;

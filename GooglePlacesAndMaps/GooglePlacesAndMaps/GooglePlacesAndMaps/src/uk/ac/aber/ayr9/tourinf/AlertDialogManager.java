@@ -1,8 +1,16 @@
-package com.androidhive.googleplacesandmaps;
+package uk.ac.aber.ayr9.tourinf;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import uk.ac.aber.ayr9.tourinf.R;
+
+/**
+ * @author androidhive + Small Modification from Adam Rigby (ayr9)
+ * Class used from androidhive third party code to display Dialog
+ * boxes when places are not present etc. Modification made to
+ * setButton method as old method in code was depracated.
+ */
 
 public class AlertDialogManager {
 	/**
@@ -28,7 +36,7 @@ public class AlertDialogManager {
 			alertDialog.setIcon((status) ? R.drawable.success : R.drawable.fail);
 
 		// Setting OK Button
-		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+		alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 			}
 		});
