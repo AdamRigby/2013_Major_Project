@@ -16,7 +16,8 @@ import com.google.api.client.json.jackson.JacksonFactory;
  * @author Androidhive + Adam Rigby (ayr9)
  * Code modified, JsonHttpParser replaced with JsonObjectParser
  * due to depracation of old method. Basic Details changed e.g.
- * API Key, application name.
+ * API Key, application name. Rankby distance parameter added
+ * to search request to get places ordered by distance.
  */
 
 
@@ -34,7 +35,7 @@ public class GooglePlaces {
 
 	private double _latitude;
 	private double _longitude;
-	private double _radius;
+	//private double _radius;
 	
 	/**
 	 * Places Search Method, uses URL above and params below to construct a full URL to get list of places 
@@ -49,7 +50,7 @@ public class GooglePlaces {
 
 		this._latitude = latitude;
 		this._longitude = longitude;
-		this._radius = radius;
+		//this._radius = radius;
 
 		try {
 
@@ -58,10 +59,11 @@ public class GooglePlaces {
 					.buildGetRequest(new GenericUrl(PLACES_SEARCH_URL));
 			request.getUrl().put("key", API_KEY);
 			request.getUrl().put("location", _latitude + "," + _longitude);
-			request.getUrl().put("radius", _radius); // Unit in meters
+			//request.getUrl().put("radius", _radius); // Unit in meters
 			request.getUrl().put("sensor", "false");
 			if(types != null)
 				request.getUrl().put("types", types);
+				request.getUrl().put("rankby", "distance");
 			
 			Log.e("URL Value",request.getUrl().toString());
 			//Parse data at URL address  

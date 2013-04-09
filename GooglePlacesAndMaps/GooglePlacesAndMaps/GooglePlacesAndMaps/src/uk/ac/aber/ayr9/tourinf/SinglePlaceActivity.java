@@ -23,28 +23,28 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 
 /**
- * 
- * @author AndroidHive + Heavily Modified by Adam Rigby (ayr9)
- *
+ * @author AndroidHive + Modified by Adam Rigby (ayr9)
+ * Class has been modified to incorporate a number of extra features.
+ * Functionality added so that a user can blick a button to view the
+ * location on a map, get directions, view a website or make a call.
+ * The Activity will also get an Image from the place results if 
+ * present and display it on screen. Finally a rating bar that uses
+ * star indicators has been added.
  */
 
 public class SinglePlaceActivity extends Activity implements OnClickListener{
-	// flag for Internet connection status
+	
+	// Flag for Internet connection status
 	Boolean isInternetPresent = false;
 
-	// Connection detector class
 	ConnectionDetector cd;
 	
-	// Alert Dialog Manager
 	AlertDialogManager alert = new AlertDialogManager();
 
-	// Google Places
 	GooglePlaces googlePlaces;
 	
-	// Place Details
 	PlaceDetails placeDetails;
 	
-	// Progress dialog
 	ProgressDialog pDialog;
 	
 	GPSTracker gps;
@@ -67,8 +67,7 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 
 	private PackageManager pm;
 	
-	// KEY Strings
-	public static String KEY_REFERENCE = "reference"; // id of the place
+	public static String KEY_REFERENCE = "reference"; // id of the Place
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,10 +102,16 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 		new LoadSinglePlaceDetails().execute(reference);
 	}
 	
+	public PlaceDetails getPlaceDetails() {
+		return placeDetails;
+	}
+
 	public void onClick(View v) {
     	switch (v.getId()) {
+    	
     	case R.id.mapButton:
-    		//System.out.println("MAP!");
+    		/**Launch Singular MapActivity, forward place name & lat/long
+    		to allow a map with marker to be produced **/
     		Intent i = new Intent(this, MapActivity.class);
     		i.putExtra("Lat", latitude);
     		i.putExtra("Long", longitude);
@@ -114,9 +119,7 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
     		startActivity(i);
     		break;
     	case R.id.directionsButton:
-    		/*String uri = String.format("geo:%f,%f", latitude, longitude);
-    		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-    		startActivity(intent);*/
+    		// If GPS can get location, launch an Intent to start the map application with Directions.
     		gps = new GPSTracker(this);
     		if (gps.canGetLocation()){
     			Intent in = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?saddr=" + gps.getLatitude() + "," + gps.getLongitude() + "&daddr=" + latitude + "," + longitude));
@@ -124,40 +127,31 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
     			break;
     		} 
     		else {
-    			// Can't get user's current location
+    			// Can't get user's current location, show dialog warning
     			alert.showAlertDialog(SinglePlaceActivity.this, "GPS Status",
     					"Couldn't get location information. Please enable GPS",
     					false);
-    			// stop executing code by return
     			break;
     		}
     	case R.id.websiteButton:
-    		/*String uri = String.format("geo:%f,%f", latitude, longitude);
-    		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-    		startActivity(intent);*/
-    		
+    		// Get Website URL from Place serializable class and launch intent
     		Intent in = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(websiteURL));
     		startActivity(in);
     		break;
     	case R.id.callButton:
-    		/*String uri = String.format("geo:%f,%f", latitude, longitude);
-    		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-    		startActivity(intent);*/
+    		// Make phone call with intent using Place class phoneNO key
     		Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+phoneNO));
-    		
     		startActivity(intent);
     		break;
     	}
     }
 	
-	/**
-	 * Background Async Task to Load Google places
-	 * */
+	
+	// Background Asynchronous Task to Load Google places
 	class LoadSinglePlaceDetails extends AsyncTask<String, String, String> {
 
-		/**
-		 * Before starting background thread Show Progress Dialog
-		 * */
+		
+		// Before starting background thread, show progress dialog until everythings completed 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -168,16 +162,14 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 			pDialog.show();
 		}
 
-		/**
-		 * getting Profile JSON
-		 * */
+		 // Get Profile JSON
 		protected String doInBackground(String... args) {
 			String reference = args[0];
 			
-			// creating Places class object
+			// Creating Places class object
 			googlePlaces = new GooglePlaces();
 
-			// Check if used is connected to Internet
+			// Get place details by sending Place reference as a parameter
 			try {
 				placeDetails = googlePlaces.getPlaceDetails(reference);
 
@@ -187,25 +179,21 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 			return null;
 		}
 
-		/**
-		 * After completing background task Dismiss the progress dialog
-		 * **/
+		//After completing background task
 		protected void onPostExecute(String file_url) {
-			// dismiss the dialog after getting all products
+			// dismiss progress dialog animation after getting all products
 			pDialog.dismiss();
-			// updating UI from Background Thread
+			// Update GUI from Background Thread
 			runOnUiThread(new Runnable() {
 				
 
 				public void run() {
-					/**
-					 * Updating parsed Places into LISTVIEW
-					 * */
+
 					if(placeDetails != null){
+						// Check place details status
 						String status = placeDetails.status;
 						
-						// check place deatils status
-						// Check for all possible status
+						// Get JSON parsed results if everythings OK
 						if(status.equals("OK")){
 							if (placeDetails.result != null) {
 								name = placeDetails.result.name;
@@ -215,12 +203,13 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 								longitude = Double.toString(placeDetails.result.geometry.location.lng);
 								rating = Double.toString(placeDetails.result.rating);
 								
+								// Make button visible in layout if website available.
 								if (placeDetails.result.website != null) {
 									websiteURL = placeDetails.result.website;
 									websiteButton.setVisibility(View.VISIBLE);
 								}
 								
-
+								// Make button visible if device has the ability to place calls e.g. phone, not most tablets
 								if (placeDetails.result.formatted_phone_number != null && pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
 									phoneNO = placeDetails.result.formatted_phone_number;
 									callButton.setVisibility(View.VISIBLE);
@@ -228,8 +217,7 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 								
 								Log.d("Place ", name + address + phone + latitude + longitude);
 								
-								// Displaying all the details in the view
-								// single_place.xml
+								// Declare all the details in the view/layout file single_place.xml
 								TextView lbl_name = (TextView) findViewById(R.id.name);
 								TextView lbl_address = (TextView) findViewById(R.id.address);
 								TextView lbl_phone = (TextView) findViewById(R.id.phone);
@@ -238,8 +226,7 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 								RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 								ImageView placeImage = (ImageView) findViewById(R.id.placeImage);
 								
-								// Check for null data from google
-								// Sometimes place details might missing
+								// Check for null data in Places request, sometimes details are missing
 								name = name == null ? "Not present" : name; // if name is null display as "Not present"
 								address = address == null ? "Not present" : address;
 								phone = phone == null ? "Not present" : phone;
@@ -247,17 +234,22 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 								longitude = longitude == null ? "Not present" : longitude;
 								rating = placeDetails.result.rating == 0 ? "No rating" : rating;
 								
+								// Set text labels
 								lbl_name.setText(name);
 								lbl_address.setText(address);
 								lbl_phone.setText(Html.fromHtml("<b>Phone:</b> " + phone));
 								lbl_location.setText(Html.fromHtml("<b>Latitude:</b> " + latitude + ", <b>Longitude:</b> " + longitude));
 								lbl_rating.setText(Html.fromHtml("<b>Rating:</b> "));
 								
+								// Give rating out of 5 with accuracy to 0.25, get rating from place result.
 								ratingBar.setMax(5);
 								ratingBar.setStepSize(0.25f);
 								ratingBar.setRating((float) placeDetails.result.rating);
 								
+								// Get a photo from the JSON result parsed, if a reference is present
 								if (placeDetails.result.photos != null && placeDetails.result.photos.size() > 0 && placeDetails.result.photos.get(0).photo_reference.length() > 0) {
+									
+									// URL to get photo from
 									String photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&key=AIzaSyDx7K8jvVIIK8SlSGcLJZkeqdGlEdR6OWs&photoreference=";
 								
 									photoUrl = photoUrl + placeDetails.result.photos.get(0).photo_reference + "&sensor=false";
@@ -265,8 +257,10 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 									Log.e(this.toString(), placeDetails.result.photos.toString());
 									Log.e(this.toString(), photoUrl);
 									
+									// Get the image from the URL
 									new DownloadImageTask().execute(photoUrl, placeImage);
 									
+									// Show the Image in the view (deafault hidden)
 									placeImage.setVisibility(View.VISIBLE);
 								}
 																
@@ -321,7 +315,7 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 
 	}
 	
-	
+	// Open connection to URL given and get the bitmap/photo at the address
 	public static Bitmap getBitmapFromURL(String src) {
 		try {
 			URL url = new URL(src);
@@ -338,6 +332,7 @@ public class SinglePlaceActivity extends Activity implements OnClickListener{
 		}
 	}
 
+	// Create new seperate thread to run the above method, sets the bitmap for use
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
 		private String myUrl;

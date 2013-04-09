@@ -12,7 +12,7 @@ import uk.ac.aber.ayr9.tourinf.R;
 
 /**
  * @author Adam Rigby (ayr9)
- * New class to recreate a similar outcome to map class in androidhive third party
+ * New class to recreate a similar outcome to map class discovered in androidhive third party
  * code. Instead of using map view, uses the new Android Maps v2 API. Google's mapdemo
  * example was used as a tutorial to find out how the new version works.
  */

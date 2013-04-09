@@ -7,7 +7,7 @@ import com.google.api.client.util.Key;
  * @author Androidhive
  * Holds the status of the JSON parsing and its result (details) 
  * for a single place/location.
- */
+ **/
 
 /** Class implemented from "Serializable" so that you can pass this
  *  class Object to another using Intents, otherwise you can't pass 

@@ -6,7 +6,7 @@ import com.google.api.client.util.Key;
 
 /**
  * @author Androidhive + Modifications from Adam Rigby (ayr9)
- * JSON is parsed into this serialisable class for storage.
+ * JSON request is parsed into this serialisable class for storage.
  * Modification were made to include a static class for photo's with
  * a key to a photo reference. The place class has also been modified
  * to hold keys to an ArrayList of photos a website and a rating.

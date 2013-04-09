@@ -6,8 +6,8 @@ import com.google.api.client.util.Key;
 
 /**
  * @author Androidhive
- * Holds the status of the JSON parsing and its results for one 
- * or more places within an area.
+ * Holds the status of the JSON parsing and its results for the list
+ *  of one or more places within an area.
  */
 
 /** Class implemented from "Serializable" so that you can pass this

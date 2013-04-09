@@ -24,10 +24,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 /**
- * @author Androidhive + Some Modifications from Adam Rigby (ayr9)
+ * @author Androidhive + Modifications from Adam Rigby (ayr9)
  * This Activity is responsible for calling the GooglePlaces class
  * receiving its results and displaying them. The doInBackground method
- * in LoadPlaces class has been modified to take a typle of place as a 
+ * in LoadPlaces class has been modified to take a type of place as a 
  * parameter. A Geocoder has also been implemented to take in any address'
  * entered manually and convert them into a lat/long value for Places search
  * and mapping.   
@@ -105,7 +105,7 @@ public class MainPlacesActivity extends Activity {
 		
 		// button show on map
 		btnShowOnMap = (Button) findViewById(R.id.btn_show_map);
-
+		
 		/**Call background Async task to load Google Places
 		After getting places from Google all the data is shown in listview**/
 		new LoadPlaces().execute();
@@ -149,7 +149,11 @@ public class MainPlacesActivity extends Activity {
         });
 	}
 
-	 //Background AsyncTask to load Google Places
+	 public PlacesList getNearPlaces() {
+		return nearPlaces;
+	}
+
+	//Background AsyncTask to load Google Places
 	class LoadPlaces extends AsyncTask<String, String, String> {
 
 		/**
@@ -158,11 +162,19 @@ public class MainPlacesActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pDialog = new ProgressDialog(MainPlacesActivity.this);
-			pDialog.setMessage(Html.fromHtml("<b>Search</b><br/>Loading Places..."));
-			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(false);
-			pDialog.show();
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+	
+					pDialog = new ProgressDialog(MainPlacesActivity.this);
+					pDialog.setMessage(Html.fromHtml("<b>Search</b><br/>Loading Places..."));
+					pDialog.setIndeterminate(false);
+					pDialog.setCancelable(false);
+					pDialog.show();
+				}
+			});
+			
 		}
 
 		/**
@@ -215,11 +227,18 @@ public class MainPlacesActivity extends Activity {
 		 * and show the data in UI. Always use runOnUiThread(new Runnable()) 
 		 * to update UI from background thread **/
 		protected void onPostExecute(String file_url) {
-			// dismiss the dialog after getting all products
-			pDialog.dismiss();
+			
 			// updating UI from Background Thread
 			runOnUiThread(new Runnable() {
 				public void run() {
+					
+					// dismiss the dialog after getting all products
+					try {
+						pDialog.dismiss();
+					} catch (Exception e) {
+						
+					}
+					
 					/**
 					 * Updating parsed Places into LISTVIEW
 					 * */
