@@ -5,9 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import uk.ac.aber.ayr9.tourinf.R;
 
@@ -43,20 +41,12 @@ public class ImageAdapter extends BaseAdapter {
 
     // Create new ImageView for each item referenced, using gridview_row
     //as the layout file for icon and text.
-    @SuppressWarnings("unused")
 	public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
         if (convertView == null) {  // If not recycled, initialise attributes
-           imageView = new ImageView(mContext);
-           imageView.setLayoutParams(new GridView.LayoutParams(120, 120));
-           imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-           imageView.setPadding(8, 8, 8, 8);
            convertView = LayoutInflater.from(mContext).inflate(R.layout.gridview_row, null);
-        } else {
-           //imageView = (ImageView) convertView;
-        }
+        } 
         
-        RelativeLayout rl=(RelativeLayout) convertView.findViewById(R.id.relativeLayout1);
         imageView=(ImageView)convertView.findViewById(R.id.imageGrid);
         imageView.setImageResource(mThumbIds[position]);
         TextView txt= (TextView) convertView.findViewById(R.id.textGrid);

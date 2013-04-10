@@ -64,7 +64,8 @@ public class GooglePlaces {
 			if(types != null)
 				request.getUrl().put("types", types);
 				request.getUrl().put("rankby", "distance");
-			
+				
+			//request.setConnectTimeout(200000); For Testing on TestDroid
 			Log.e("URL Value",request.getUrl().toString());
 			//Parse data at URL address  
 			PlacesList list = request.execute().parseAs(PlacesList.class);
@@ -93,6 +94,7 @@ public class GooglePlaces {
 			request.getUrl().put("key", API_KEY);
 			request.getUrl().put("reference", reference);
 			request.getUrl().put("sensor", "false");
+			//request.setConnectTimeout(200000); For Testing on TestDroid
 			Log.e("URL Detail",request.getUrl().toString());
 			PlaceDetails place = request.execute().parseAs(PlaceDetails.class);
 			

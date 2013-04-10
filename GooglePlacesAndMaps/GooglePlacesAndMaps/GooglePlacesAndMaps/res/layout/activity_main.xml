@@ -8,23 +8,22 @@
         android:id="@+id/mainTitleLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_above="@+id/startButton"
         android:layout_alignParentTop="true"
-        >
+        android:layout_centerHorizontal="true" >
+
         <TextView
-        android:id="@+id/mainTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/mainTitle"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#00AAFF"
-        android:textSize="95dp"
-        tools:context=".MainActivity" />
-        
-        
+            android:id="@+id/mainTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/mainTitle"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#00AAFF"
+            android:textSize="95dp"
+            tools:context=".MainActivity" />
     </LinearLayout>
+
     <Button
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
@@ -35,42 +34,47 @@
         android:background="@drawable/current_location_selector"
         android:text="@string/startButton" />
 
-    
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/searchLayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/startButton"
         android:layout_alignLeft="@+id/startButton"
+        android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/startButton"
-        android:layout_marginTop="84dp" >
-        
-        <EditText
-        android:id="@+id/locationText"
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
-        android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@+id/searchButton"
-        android:layout_alignParentLeft="true"
-        android:ems="10"
-        android:hint="@string/enterLocation"
-        android:inputType="text" />
-        
-        <Button
-        android:id="@+id/searchButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/current_location_selector"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:text="@string/searchButton" />
+        android:layout_below="@+id/startButton"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal" >
 
-    
-        
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/searchInnerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            tools:ignore="UselessParent" >
 
-    
+            <EditText
+                android:id="@+id/locationText"
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/searchButton"
+                android:ems="10"
+                android:hint="@string/enterLocation"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/searchButton"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/current_location_selector"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="@string/searchButton" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
